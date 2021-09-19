@@ -1,0 +1,82 @@
+{% extends '../template.html' %}
+{% load static %}
+{% block conteudo %}
+    <div class="row">
+        <div class="col-12">
+            <div align="center">
+                <h2>Editar Jogo</h2>
+            </div>
+        </div>
+    </div>
+    { % include 'partils/_alertas.html' %}
+    <form action="{% url 'atualiza_jogo' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" value="{{ jogo.id }}" name="jogo_id">
+        <div class="row">
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" value="{{ jogo.nome }}" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="criador" class="form-label">Criador</label>
+                <input type="text" class="form-control" id="criador" name="criador" value="{{ jogo.criador }}" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="genero" class="form-label">Gênero</label>
+                <input type="text" class="form-control" id="genero" name="genero" value="{{ jogo.generos }}" required>
+            </div>
+            <div class="col-12 col-lg-3 mb-3">
+                <label for="critica" class="form-label">Críticas</label>
+                <input type="text" class="form-control" id="critica" name="critica" value="{{ jogo.critica }}" required>
+            </div>
+            <div class="col-12 col-lg-3 mb-3">
+                <label for="enredo" class="form-label">Enredo</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" id="enredo" name="enredo">{{ jogo.enredo }}</textarea>
+            </div>
+
+            <div class="col-12 col-lg-3 mb-3">
+                <label for="avaliacao" class="form-label">Avaliação</label>
+                <input type="text" class="form-control" id="avaliacao" name="avaliacao" value="{{ jogo.avaliacao }}" required>
+            </div>
+            <div class="col-12 col-lg-3 mb-3">
+                <label for="datadelancamento" class="form-label">Data de Lançamento</label>
+                <input type="number" class="form-control" id="datadelancamento" name="datadelancamento" value="{{ jogo.datadelancamento }}" required>
+            </div>
+            <div class="col-12 col-lg-3 mb-3">
+                <label for="plataformas" class="form-label">Plataformas</label>
+                <input type="text" class="form-control" id="plataformas" name="plataformas" value="{{ jogo.plataformas }}" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+              <label for="capa" class="form-label">Capa do jogo</label>
+              <input class="form-control" type="file" id="capa" name="capa" id="capa">
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="desenvolvedor" class="form-label">Desenvolvedor</label>
+                <select class="form-select" multiple size="3" name="desenvolvedor" aria-label="multiple select example" id="desenvolvedor" required>
+                    {% for desenvolvedores in empresa %}
+                        {% if desenvolvedores in jogo.desenvolvedores.all %}
+                            <option value="{{ desenvolvedores.id }}" selected>{{ desenvolvedores.nome }}</option>
+                        {% else %}
+                            <option value="{{ desenvolvedores.id }}">{{ desenvolvedores.nome }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+             <div class="col-12 col-lg-6 mb-3">
+                <label for="usuario" class="form-label">Usuário</label>
+                <select class="form-select" aria-label="Default select example" name="usuario" id="usuario" required>
+                    {% for usuario in usuario %}
+                        {% if usuario == jogo.usuario %}
+                            <option value="{{ usuario.id }}" selected>{{ usuario.nome }}</option>
+                        {% else %}
+                            <option value="{{ usuario.id }}">{{ usuario.nome }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 col-lg-12">
+                <button class="btn btn-primary" type="submit">Atualizar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

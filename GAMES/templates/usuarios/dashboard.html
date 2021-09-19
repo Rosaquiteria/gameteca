@@ -1,0 +1,36 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block conteudo %}
+
+
+            <div class="page-header text-center py-3">
+                <div align="center">
+                    <h2>Jogos Registrados por {{ user.username }}</h2>
+                </div>
+            </div>
+            {% include 'partils/_alertas.html' %}
+            <div class="row">
+                {% for jogo in jogos %}
+                <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    {% if jogo.capa == '' %}
+                        <img src=" {% static 'img/jogo.jpeg'%}" class="card-img-top" alt="...">
+                    {% else %}
+                        <img src=" {{ jogo.capa.url }}" class="card-img-top" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ jogo.nome }}</h5>
+                        <p class="card-text"> Criador: {{ jogo.criador }}</p>
+                        <a class="btn btn-primary" href="{% url 'jogo' jogo.id %}" role="button">Visualizar</a>
+                        <a class="btn btn-success" href="{% url 'edita_jogo' jogo.id %}" role="button">Editar</a>
+                        <a class="btn btn-danger" href="{% url 'deleta_jogo' jogo.id %}" role="button">Deletar</a>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+
+
+{% endblock %}

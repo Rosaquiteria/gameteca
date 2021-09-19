@@ -1,0 +1,34 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block conteudo %}
+            <div class="page-header text-center py-3">
+                <div align="center">
+                    <h2></h2>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for jogo in jogos %}
+                <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    {% if jogo.capa == '' %}
+                        <img src=" {% static 'img/jogo.jpeg'%}" class="card-img-top" alt="...">
+                    {% else %}
+                        <img src=" {{ jogo.capa.url }}" class="card-img-top" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ jogo.nome }}</h5>
+                        <p class="card-text"> Criador: {{ jogo.criador }}</p>
+                        <a class="btn btn-primary" href="{% url 'jogo' jogo.id %}" role="button">Visualizar</a>
+
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+  </body>
+</html>
+{% endblock %}

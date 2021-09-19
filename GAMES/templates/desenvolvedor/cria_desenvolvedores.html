@@ -1,0 +1,36 @@
+{% extends '../template.html' %}
+{% load static %}
+{% block conteudo %}
+    <div class="row">
+        <div class="col-12">
+            <div align="center">
+                <h2>Criar Empresa</h2>
+            </div>
+        </div>
+    </div>
+    {% include 'partils/_alertas.html' %}
+    <form action="{% url 'cria_desenvolvedores' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="cid" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="cid" name="cid" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="nacionalidade" class="form-label">País</label>
+                <input type="text" class="form-control" id="nacionalidade" name="nacionalidade" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="nacionalidades" class="form-label">Estado</label>
+                <input type="text" class="form-control" id="nacionalidades" name="nacionalidades" required>
+            </div>
+            <div class="col-12 col-lg-12">
+                <button class="btn btn-primary" type="submit">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

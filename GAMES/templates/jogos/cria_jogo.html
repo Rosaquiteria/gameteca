@@ -1,0 +1,77 @@
+
+{% extends '../template.html' %}
+{% load static %}
+{% block conteudo %}
+    <div class="row">
+        <div class="col-12">
+            <div align="center">
+                <h2>Criar Jogo</h2>
+            </div>
+        </div>
+    </div>
+    { % include 'partils/_alertas.html' %}
+    <form action="{% url 'criar_jogo' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="criador" class="form-label">Criador</label>
+                <input type="text" class="form-control" id="criador" name="criador" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="genero" class="form-label">Gênero</label>
+                <input type="text" class="form-control" id="genero" name="genero" required>
+            </div>
+            <div class="col-12 col-lg-3 mb-3">
+                <label for="critica" class="form-label">Críticas</label>
+                <input type="text" class="form-control" id="critica" name="critica" required>
+            </div>
+            <div class="col-12 col-lg-3 mb-3">
+                <label for="enredo" class="form-label">Enredo</label>
+                <input type="text" class="form-control" id="enredo" name="enredo" required>
+            </div>
+
+            <div class="col-12 col-lg-3 mb-3">
+                <label for="avaliacao" class="form-label">Avaliação</label>
+                <input type="text" class="form-control" id="avaliacao" name="avaliacao" required>
+            </div>
+            <div class="col-12 col-lg-3 mb-3">
+                <label for="datadelancamento" class="form-label">Data de Lançamento</label>
+                <input type="number" class="form-control" id="datadelancamento" name="datadelancamento" required>
+            </div>
+            <div class="col-12 col-lg-3 mb-3">
+                <label for="plataformas" class="form-label">Plataformas</label>
+                <input type="text" class="form-control" id="plataformas" name="plataformas" required>
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+              <label for="capa" class="form-label">Capa do jogo</label>
+              <input class="form-control" type="file" id="capa" name="capa">
+            </div>
+            <div class="col-12 col-lg-6 mb-3">
+                <label for="desenvolvedor" class="form-label">Desenvolvedor</label>
+                <select class="form-select" multiple size="3" name="desenvolvedor" id="desenvolvedor" aria-label="multiple select example"  required>
+                    {% for desenvolvedores in empresa %}
+                        <option value="{{ desenvolvedores.id }}" >{{ desenvolvedores.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+             <div class="col-12 col-lg-6 mb-3">
+                <label for="usuario" class="form-label">Usuário</label>
+                <select class="form-select" aria-label="Default select example" name="usuario" id="usuario" required>
+                    {% for usuario in usuario %}
+                        <option value="{{ usuario.id }}" >{{ usuario.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <div class="col-12 col-lg-12">
+                <button class="btn btn-primary" type="submit">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

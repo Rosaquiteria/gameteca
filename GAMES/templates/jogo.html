@@ -1,0 +1,53 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block conteudo %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewsport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="static/css/bootstrap.css.css">
+      <link rel="icon" href="static/img/cabelos.png">
+      <title>Jogos</title>
+
+  </head>
+  <body>
+        <div class="container my-3">
+            <div class="page-header text-center py-3">
+                <h2>Jogos</h2>
+            </div>
+            <div class="row">
+                <div class="card" style="">
+                    {% if jogo.capa == '' %}
+                        <img src=" {% static 'img/jogo.jpeg'%}" class="card-img-top" alt="...">
+                    {% else %}
+                        <img src=" {{ jogo.capa.url }}" style="width: 18rem;" class="card-img-top" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="h4" class="card-title">{{ jogo.nome }}</h5>
+                        <p ><strong>Criador:</strong> {{ jogo.criador }}</p>
+                        <p class="card-text"><strong>Data de lançamento:</strong>  {{ jogo.datadelancamento }} </p>
+                        <p class="card-text"><strong>Gênero:</strong>  {{ jogo.generos }} </p>
+                        <p class="card-text"><strong>Enredo:</strong>   </p>
+                        <p class="card-text">{{ jogo.enredo }}</p>
+                        <p class="card-text"><strong>Crítica:</strong>  {{ jogo.critica }} </p>
+                        <p class="card-text"><strong>Plataforma:</strong> {{ jogo.plataformas }} </p>
+                        <p class="card-text"><strong>Avaliação:</strong>  {{ jogo.avaliacao }}</p>
+                        <p class="card-text"><strong>Usuário:</strong>  {{ jogo.usuario }}</p>
+                        {% for desenvolvedores in jogo.desenvolvedores.all%}
+                            <p class="card-text"><strong>Desenvolvedores:</strong>  {{ desenvolvedores.nome }} </p>
+                        {% endfor %}
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+  </body>
+</html>
+{% endblock %}
